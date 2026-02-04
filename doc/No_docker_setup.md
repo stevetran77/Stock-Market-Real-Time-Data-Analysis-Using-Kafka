@@ -44,14 +44,14 @@ Create the topic:
 -----------------------------
 Duplicate the session & enter in a new console --
 cd kafka_2.12-3.3.1
-bin/kafka-topics.sh --create --topic demo_testing --bootstrap-server 47.129.234.154:9092 --replication-factor 1 --partitions 1
+bin/kafka-topics.sh --create --topic demo_testing --bootstrap-server your_public_ip:9092 --replication-factor 1 --partitions 1
 
 Start Producer:
 --------------------------
-bin/kafka-console-producer.sh --topic demo_testing --bootstrap-server 47.129.234.154:9092
+bin/kafka-console-producer.sh --topic demo_testing --bootstrap-server your_public_ip:9092
 
 Start Consumer:
 -------------------------
 Duplicate the session & enter in a new console --
 cd kafka_2.12-3.3.1
-bin/kafka-console-consumer.sh --topic demo_testing --bootstrap-server 47.129.234.154:9092
+bin/kafka-console-consumer.sh --topic demo_testing --bootstrap-server your_public_ip:9092
