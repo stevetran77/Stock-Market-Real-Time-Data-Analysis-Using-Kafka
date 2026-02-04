@@ -1,4 +1,4 @@
-# StimulateStock Market Real-Time Data Pipeline
+# Stock Market Real-Time Stimulation Data Pipeline
 
 This project implements a real-time data pipeline for streaming and analyzing stock market data using Apache Airflow, Apache Kafka, Docker, and AWS. The pipeline simulates real-time stock updates, processes them, stores the results in an AWS S3 bucket, and uses AWS Glue Crawler and Data Catalog to make the data queryable via Amazon Athena.
 
@@ -6,7 +6,7 @@ This project implements a real-time data pipeline for streaming and analyzing st
 
 The pipeline consists of the following components:
 
-1.  **Data Source**: A CSV file containing simulated stock market data (`data/indexProcessed.csv`).
+1.  **Data Source**: A CSV file containing stock market data (`data/indexProcessed.csv`).
 2.  **Producer**: A Python script (`producer.py`) that reads records from the CSV and sends them to a Kafka topic (simulates the streaming process).
 3.  **Kafka & Zookeeper**: The message broker that handles the real-time data stream.
 4.  **Consumer**: A Python script (`consumer.py`) that subscribes to the Kafka topic, processes the incoming data, and uploads it to an AWS S3 bucket.
