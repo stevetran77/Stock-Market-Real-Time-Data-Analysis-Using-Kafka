@@ -1,5 +1,6 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 from datetime import datetime
 
 default_args = {
@@ -12,7 +13,7 @@ default_args = {
 with DAG(
     'kafka_start',
     default_args=default_args,
-    description='Start the Stock Market Producer and Consumer containers',
+    description='Start the Stock Market Producer and Consumer containers, then trigger Glue Crawler',
     schedule_interval=None,
     catchup=False,
     tags=['kafka', 'control'],
@@ -44,3 +45,17 @@ with DAG(
         fi
         ''',
     )
+
+    # Trigger Glue Crawler after consumer starts processing data
+    # Note: In production, you might want to add a sensor to wait for data in S3
+    trigger_glue_crawler = TriggerDagRunOperator(
+        task_id='trigger_glue_crawler',
+        trigger_dag_id='glue_crawler_orchestration',
+        wait_for_completion=False,  # Don't wait for crawler to finish
+        reset_dag_run=True,
+        execution_date='{{ ds }}',
+        conf={'triggered_by': 'kafka_start'},
+    )
+
+    # Define task dependencies
+    start_workload >> trigger_glue_crawler

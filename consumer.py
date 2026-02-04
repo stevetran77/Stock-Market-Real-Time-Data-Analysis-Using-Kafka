@@ -19,7 +19,7 @@ S3_BUCKET_NAME = os.getenv('S3_BUCKET_NAME', 'kafka-stock-market-steve')
 # SECRET_NAME: Name of the secret in AWS Secrets Manager containing S3 credentials.
 SECRET_NAME = os.getenv('AWS_SECRET_NAME', 's3_access_secret')
 # REGION_NAME: AWS Region where the Secrets Manager and S3 bucket are located.
-REGION_NAME = os.getenv('AWS_REGION', 'us-east-1')
+REGION_NAME = os.getenv('AWS_REGION', 'ap-southeast-1')
 
 def get_secret():
     """
